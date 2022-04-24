@@ -26,7 +26,7 @@ function Section({title, movies}: Props) {
     }
   }
   return (
-    <div className="h-[14vh] md:h-[18vh] lg:h-[16vh]" >
+    <div className="h-auto md:h-auto lg:h-auto" >
       <h2 className="pl-2 w-full cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
         {title}
       </h2>
