@@ -27,7 +27,7 @@ function Banner({netflixOriginals}: Props) {
             {movie?.title || movie?.name || movie?.original_name}
         </MovieTitle>
         <MovieDescription>
-           {movie?.overview}
+           {movie?.overview.slice(0,200)}..
         </MovieDescription>
         <ButtonContainer>
           <PlayButton>
@@ -45,7 +45,7 @@ function Banner({netflixOriginals}: Props) {
 export default Banner
 
 const Container = tw.div`
-  flex flex-col space-y-2 pl-10 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12 
+  flex flex-col space-y-2 pl-10 py-16 md:space-y-4 lg:h=[65vh] lg:justify-end
 `
 const ImageContainer = tw.div`
   absolute top-0 left-0 -z-10
@@ -57,7 +57,7 @@ const Title = tw.div`
   m-4 
 `
 const MovieTitle = tw.h1`
-  text-2xl md:text-4xl lg:text-7xl mb-4 font-bold
+  text-2xl md:text-4xl lg:text-7xl mb-4 font-bold lg:mt-32
 `
 const MovieDescription = tw.p`
   max-w-xs text-xs text-shadow-lg md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl font-extralight
