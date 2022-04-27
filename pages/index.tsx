@@ -1,12 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 import tw from 'tailwind-styled-components'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import Modal from '../components/Modal'
 import Section from '../components/Section'
+import useAuth from '../hooks/useAuth'
 import { Movie } from '../interface/type'
+import { modalState } from '../recoil/modalAtom'
 import requests from '../utils/requests'
+
 
 interface Props {
   netflixOriginals: Movie[]
@@ -28,7 +33,10 @@ const Home = ({
   romanceMovies, 
   documentaries
 }: Props) => {
-  
+  const {logout, loading} = useAuth();
+  const showModal = useRecoilValue(modalState);
+
+  if (loading) return null;
   return (
     <div
       className={`relative h-screen bg-gradient-to-bl lg:h-[140vh] 
@@ -59,7 +67,7 @@ const Home = ({
           <Section title="Documentaries" movies={documentaries} />
         </section>
       </main>
-      
+      {showModal && <Modal/>}
     </div>
   )
 }

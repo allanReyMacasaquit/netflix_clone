@@ -4,13 +4,17 @@ import { Movie } from '../interface/type'
 import { baseUrl } from '../utils/requests'
 import { FaPlay } from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/solid'
+import { useRecoilState } from 'recoil'
+import { modalState, movieState } from '../recoil/modalAtom'
 
 interface Props {
   netflixOriginals: Movie[]
 }
 
 function Banner({netflixOriginals}: Props) {
-  const [movie, setMovie] = useState<Movie | null>(null)
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useRecoilState(modalState)
 
   useEffect(() => {
     setMovie(
@@ -30,12 +34,16 @@ function Banner({netflixOriginals}: Props) {
            {movie?.overview.slice(0,200)}..
         </MovieDescription>
         <ButtonContainer>
-          <PlayButton>
+          <button className='flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold border border-black transition transform hover:scale-x-105 md:py-2.5 md:px-8 md:text-xl bg-white/50 hover:bg-slate-300  text-black'>
               <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7 "/> Play
-          </PlayButton>
-          <InfoButton>
+          </button>
+          <button className='flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold border border-slate-500 transition transform hover:scale-x-105  hover:bg-black md:py-2.5 md:px-8 md:text-xl bg-black/60'
+           onClick={() => {
+            setCurrentMovie(movie)
+            setShowModal(true)
+          }}>
               <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" /> More Info
-          </InfoButton>
+          </button>
         </ButtonContainer>
       </Title>
     </Container>
@@ -64,10 +72,4 @@ const MovieDescription = tw.p`
 `
 const ButtonContainer = tw.div`
   flex space-x-3 mt-4
-`
-const PlayButton = tw.button`
- flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl bg-white text-black
-`
-const InfoButton = tw.button`
- flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl bg-[gray]/70
 `

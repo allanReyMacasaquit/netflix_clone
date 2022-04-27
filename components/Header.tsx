@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components/dist/tailwind'
 import {BellIcon, SearchIcon} from '@heroicons/react/solid'
 import Link from 'next/link'
+import useAuth from '../hooks/useAuth';
 
 function Header() {
 const [isScrolled, setIsScrolled] = useState(false);
@@ -39,8 +40,8 @@ useEffect(() => {
                 <SearchIcon className='hidden h-6 w-6 sm:inline cursor-pointer'/>
                 <SearchTitle>Kids</SearchTitle>
                 <BellIcon className='h-6 w-6'/>
-                <Link href='/account'>
-                    <ProfileLogo src='https://rb.gy/g1pwyx'/>
+                <Link href='/login'>
+                    <ProfileLogo  src='https://rb.gy/g1pwyx'/>
                 </Link>
             </RightMenu>
         </Container>
@@ -73,5 +74,5 @@ const SearchTitle = tw.p`
     hidden lg:inline
 `
 const ProfileLogo = tw.img`
-    cursor-pointer rounded
+    cursor-pointer rounded 
 `
